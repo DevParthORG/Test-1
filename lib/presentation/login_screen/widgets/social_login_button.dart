@@ -1,0 +1,62 @@
+import 'package:flutter/material.dart';
+import 'package:sizer/sizer.dart';
+import 'package:google_fonts/google_fonts.dart';
+
+import '../../../core/app_export.dart';
+import '../../../theme/app_theme.dart';
+import '../../../widgets/custom_icon_widget.dart';
+
+class SocialLoginButton extends StatelessWidget {
+  final String iconName;
+  final String label;
+  final VoidCallback onPressed;
+  final Color backgroundColor;
+
+  const SocialLoginButton({
+    Key? key,
+    required this.iconName,
+    required this.label,
+    required this.onPressed,
+    required this.backgroundColor,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: double.infinity,
+      height: 6.h,
+      margin: EdgeInsets.only(bottom: 1.h),
+      child: ElevatedButton(
+        onPressed: onPressed,
+        style: ElevatedButton.styleFrom(
+          backgroundColor: backgroundColor,
+          foregroundColor: AppTheme.pureWhiteText,
+          elevation: 2.0,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(12.0),
+          ),
+          padding: EdgeInsets.symmetric(horizontal: 4.w, vertical: 1.5.h),
+        ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            CustomIconWidget(
+              iconName: iconName,
+              color: AppTheme.pureWhiteText,
+              size: 5.w,
+            ),
+            SizedBox(width: 3.w),
+            Text(
+              label,
+              style: GoogleFonts.inter(
+                fontSize: 14.sp,
+                fontWeight: FontWeight.w500,
+                color: AppTheme.pureWhiteText,
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
