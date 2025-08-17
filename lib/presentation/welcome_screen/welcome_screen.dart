@@ -12,11 +12,6 @@ import './widgets/floating_icon_widget.dart';
 import './widgets/football_mascot_widget.dart';
 import './widgets/sparkle_painter.dart';
 import './widgets/terms_checkbox_widget.dart';
-import 'widgets/action_buttons_widget.dart';
-import 'widgets/floating_icon_widget.dart';
-import 'widgets/football_mascot_widget.dart';
-import 'widgets/sparkle_painter.dart';
-import 'widgets/terms_checkbox_widget.dart';
 
 class WelcomeScreen extends StatefulWidget {
   const WelcomeScreen({Key? key}) : super(key: key);

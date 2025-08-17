@@ -149,11 +149,13 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
               child: SingleChildScrollView(
                 child: Column(
                   children: [
+                    SizedBox(height: 1.h),
                     // Cover Photo
                     CoverPhotoWidget(
                       coverImageUrl: userData['coverPhoto'] as String,
                       onEditPressed: _handleCoverPhotoEdit,
                     ),
+                    SizedBox(height: 2.h),
 
                     // Profile Header
                     ProfileHeaderWidget(
@@ -166,6 +168,8 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                       onCameraPressed: _handleAvatarUpdate,
                     ),
 
+                    SizedBox(height: 2.h),
+
                     // User Stats
                     UserStatsWidget(
                       postsCount: userData['postsCount'] as int,
@@ -173,25 +177,90 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                       likesCount: userData['likesCount'] as int,
                     ),
 
-                    // Posts Grid Header
+                    // Enhanced Posts Grid Header
                     Container(
                       margin:
-                          EdgeInsets.symmetric(horizontal: 4.w, vertical: 2.h),
+                          EdgeInsets.symmetric(horizontal: 4.w, vertical: 3.h),
+                      padding: EdgeInsets.all(4.w),
+                      decoration: BoxDecoration(
+                        gradient: LinearGradient(
+                          begin: Alignment.topLeft,
+                          end: Alignment.bottomRight,
+                          colors: [
+                            AppTheme.interactivePurple.withValues(alpha: 0.15),
+                            AppTheme.footballOrange.withValues(alpha: 0.1),
+                          ],
+                        ),
+                        borderRadius: BorderRadius.circular(16),
+                        border: Border.all(
+                          color:
+                              AppTheme.interactivePurple.withValues(alpha: 0.2),
+                          width: 1.5,
+                        ),
+                        boxShadow: [
+                          BoxShadow(
+                            color: AppTheme.shadowColor.withValues(alpha: 0.1),
+                            offset: Offset(0, 4),
+                            blurRadius: 16,
+                            spreadRadius: 0,
+                          ),
+                        ],
+                      ),
                       child: Row(
                         children: [
+                          Container(
+                            padding: EdgeInsets.all(2.5.w),
+                            decoration: BoxDecoration(
+                              gradient: LinearGradient(
+                                colors: [
+                                  AppTheme.interactivePurple,
+                                  AppTheme.footballOrange,
+                                ],
+                              ),
+                              borderRadius: BorderRadius.circular(12),
+                              boxShadow: [
+                                BoxShadow(
+                                  color: AppTheme.interactivePurple
+                                      .withValues(alpha: 0.3),
+                                  offset: Offset(0, 4),
+                                  blurRadius: 12,
+                                  spreadRadius: 0,
+                                ),
+                              ],
+                            ),
+                            child: CustomIconWidget(
+                              iconName: 'grid_view',
+                              color: AppTheme.pureWhiteText,
+                              size: 5.w,
+                            ),
+                          ),
+                          SizedBox(width: 3.w),
                           Text(
-                            'Posts',
+                            'My Posts',
                             style: AppTheme.darkTheme.textTheme.titleMedium
                                 ?.copyWith(
                               color: AppTheme.pureWhiteText,
                               fontWeight: FontWeight.w600,
+                              letterSpacing: 0.5,
                             ),
                           ),
                           Spacer(),
-                          CustomIconWidget(
-                            iconName: 'grid_view',
-                            color: AppTheme.interactivePurple,
-                            size: 6.w,
+                          Container(
+                            padding: EdgeInsets.symmetric(
+                                horizontal: 3.w, vertical: 1.h),
+                            decoration: BoxDecoration(
+                              color: AppTheme.primaryBackground
+                                  .withValues(alpha: 0.3),
+                              borderRadius: BorderRadius.circular(8),
+                            ),
+                            child: Text(
+                              '${userPosts.length}',
+                              style: AppTheme.darkTheme.textTheme.titleSmall
+                                  ?.copyWith(
+                                color: AppTheme.pureWhiteText,
+                                fontWeight: FontWeight.w700,
+                              ),
+                            ),
                           ),
                         ],
                       ),
@@ -214,7 +283,7 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                       onFollowSuggestion: _handleFollowSuggestion,
                     ),
 
-                    SizedBox(height: 10.h), // Bottom padding for tab bar
+                    SizedBox(height: 12.h), // Bottom padding for tab bar
                   ],
                 ),
               ),
@@ -229,24 +298,78 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
   Widget _buildAppBar() {
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 4.w, vertical: 2.h),
+      margin: EdgeInsets.symmetric(horizontal: 2.w),
+      decoration: BoxDecoration(
+        gradient: LinearGradient(
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+          colors: [
+            AppTheme.surfaceGray.withValues(alpha: 0.3),
+            AppTheme.surfaceGray.withValues(alpha: 0.1),
+          ],
+        ),
+        borderRadius: BorderRadius.circular(20),
+        border: Border.all(
+          color: AppTheme.dividerColor.withValues(alpha: 0.2),
+          width: 1,
+        ),
+      ),
       child: Row(
         children: [
+          Container(
+            padding: EdgeInsets.all(2.w),
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                colors: [
+                  AppTheme.interactivePurple,
+                  AppTheme.footballOrange,
+                ],
+              ),
+              borderRadius: BorderRadius.circular(8),
+            ),
+            child: CustomIconWidget(
+              iconName: 'person',
+              color: AppTheme.pureWhiteText,
+              size: 5.w,
+            ),
+          ),
+          SizedBox(width: 3.w),
           Text(
             'Profile',
             style: AppTheme.darkTheme.textTheme.headlineSmall?.copyWith(
               color: AppTheme.pureWhiteText,
               fontWeight: FontWeight.w700,
+              letterSpacing: 0.5,
             ),
           ),
           Spacer(),
           GestureDetector(
             onTap: _handleSettings,
             child: Container(
-              width: 10.w,
-              height: 10.w,
+              width: 12.w,
+              height: 12.w,
               decoration: BoxDecoration(
-                color: AppTheme.surfaceGray,
-                borderRadius: BorderRadius.circular(8),
+                gradient: LinearGradient(
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
+                  colors: [
+                    AppTheme.surfaceGray,
+                    AppTheme.surfaceGray.withValues(alpha: 0.7),
+                  ],
+                ),
+                borderRadius: BorderRadius.circular(12),
+                border: Border.all(
+                  color: AppTheme.dividerColor.withValues(alpha: 0.3),
+                  width: 1,
+                ),
+                boxShadow: [
+                  BoxShadow(
+                    color: AppTheme.shadowColor.withValues(alpha: 0.1),
+                    offset: Offset(0, 4),
+                    blurRadius: 12,
+                    spreadRadius: 0,
+                  ),
+                ],
               ),
               child: CustomIconWidget(
                 iconName: 'settings',
@@ -262,15 +385,30 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
 
   Widget _buildBottomNavigationBar() {
     return Container(
-      height: 10.h,
+      height: 12.h,
       decoration: BoxDecoration(
-        color: AppTheme.surfaceGray,
+        gradient: LinearGradient(
+          begin: Alignment.topCenter,
+          end: Alignment.bottomCenter,
+          colors: [
+            AppTheme.surfaceGray,
+            AppTheme.surfaceGray.withValues(alpha: 0.9),
+          ],
+        ),
         border: Border(
           top: BorderSide(
             color: AppTheme.dividerColor.withValues(alpha: 0.3),
-            width: 1,
+            width: 1.5,
           ),
         ),
+        boxShadow: [
+          BoxShadow(
+            color: AppTheme.shadowColor.withValues(alpha: 0.1),
+            offset: Offset(0, -4),
+            blurRadius: 20,
+            spreadRadius: 0,
+          ),
+        ],
       ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -291,15 +429,43 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
     return GestureDetector(
       onTap: () => _handleTabTap(index),
       child: Container(
-        padding: EdgeInsets.symmetric(vertical: 1.h),
+        padding: EdgeInsets.symmetric(vertical: 1.h, horizontal: 2.w),
+        decoration: isActive
+            ? BoxDecoration(
+                gradient: LinearGradient(
+                  colors: [
+                    AppTheme.interactivePurple.withValues(alpha: 0.2),
+                    AppTheme.footballOrange.withValues(alpha: 0.1),
+                  ],
+                ),
+                borderRadius: BorderRadius.circular(12),
+                border: Border.all(
+                  color: AppTheme.interactivePurple.withValues(alpha: 0.3),
+                  width: 1,
+                ),
+              )
+            : null,
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            CustomIconWidget(
-              iconName: iconName,
-              color:
-                  isActive ? AppTheme.interactivePurple : AppTheme.neutralGray,
-              size: 6.w,
+            Container(
+              padding: isActive ? EdgeInsets.all(1.5.w) : EdgeInsets.all(1.w),
+              decoration: isActive
+                  ? BoxDecoration(
+                      gradient: LinearGradient(
+                        colors: [
+                          AppTheme.interactivePurple,
+                          AppTheme.footballOrange,
+                        ],
+                      ),
+                      borderRadius: BorderRadius.circular(8),
+                    )
+                  : null,
+              child: CustomIconWidget(
+                iconName: iconName,
+                color: isActive ? AppTheme.pureWhiteText : AppTheme.neutralGray,
+                size: isActive ? 6.w : 5.5.w,
+              ),
             ),
             SizedBox(height: 0.5.h),
             Text(
@@ -308,7 +474,9 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                 color: isActive
                     ? AppTheme.interactivePurple
                     : AppTheme.neutralGray,
-                fontSize: 10.sp,
+                fontSize: isActive ? 11.sp : 10.sp,
+                fontWeight: isActive ? FontWeight.w600 : FontWeight.w400,
+                letterSpacing: 0.3,
               ),
             ),
           ],

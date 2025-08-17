@@ -27,129 +27,295 @@ class ProfileHeaderWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
-      padding: EdgeInsets.symmetric(horizontal: 4.w, vertical: 2.h),
+      margin: EdgeInsets.symmetric(horizontal: 4.w),
+      padding: EdgeInsets.all(6.w),
+      decoration: BoxDecoration(
+        gradient: LinearGradient(
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+          colors: [
+            AppTheme.surfaceGray.withValues(alpha: 0.8),
+            AppTheme.surfaceGray.withValues(alpha: 0.4),
+          ],
+        ),
+        borderRadius: BorderRadius.circular(24),
+        border: Border.all(
+          color: AppTheme.interactivePurple.withValues(alpha: 0.2),
+          width: 1.5,
+        ),
+        boxShadow: [
+          BoxShadow(
+            color: AppTheme.shadowColor.withValues(alpha: 0.1),
+            offset: Offset(0, 8),
+            blurRadius: 24,
+            spreadRadius: 0,
+          ),
+          BoxShadow(
+            color: AppTheme.interactivePurple.withValues(alpha: 0.05),
+            offset: Offset(0, 4),
+            blurRadius: 16,
+            spreadRadius: 0,
+          ),
+        ],
+      ),
       child: Column(
         children: [
-          // Profile Avatar with Camera Overlay
+          // Profile Avatar with Enhanced Design
           Stack(
             children: [
               Container(
-                width: 25.w,
-                height: 25.w,
+                width: 28.w,
+                height: 28.w,
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
-                  border: Border.all(
-                    color: AppTheme.interactivePurple,
-                    width: 3,
+                  gradient: LinearGradient(
+                    begin: Alignment.topLeft,
+                    end: Alignment.bottomRight,
+                    colors: [
+                      AppTheme.interactivePurple,
+                      AppTheme.footballOrange,
+                    ],
                   ),
+                  boxShadow: [
+                    BoxShadow(
+                      color: AppTheme.interactivePurple.withValues(alpha: 0.3),
+                      offset: Offset(0, 6),
+                      blurRadius: 20,
+                      spreadRadius: 0,
+                    ),
+                  ],
                 ),
-                child: ClipOval(
-                  child: CustomImageWidget(
-                    imageUrl: avatarUrl,
-                    width: 25.w,
-                    height: 25.w,
-                    fit: BoxFit.cover,
+                padding: EdgeInsets.all(0.8.w),
+                child: Container(
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    border: Border.all(
+                      color: AppTheme.pureWhiteText.withValues(alpha: 0.2),
+                      width: 2,
+                    ),
+                  ),
+                  child: ClipOval(
+                    child: CustomImageWidget(
+                      imageUrl: avatarUrl,
+                      width: 28.w,
+                      height: 28.w,
+                      fit: BoxFit.cover,
+                    ),
                   ),
                 ),
               ),
               Positioned(
-                bottom: 0,
-                right: 0,
+                bottom: 1.w,
+                right: 1.w,
                 child: GestureDetector(
                   onTap: onCameraPressed,
                   child: Container(
-                    width: 8.w,
-                    height: 8.w,
+                    width: 9.w,
+                    height: 9.w,
                     decoration: BoxDecoration(
-                      color: AppTheme.interactivePurple,
+                      gradient: LinearGradient(
+                        begin: Alignment.topLeft,
+                        end: Alignment.bottomRight,
+                        colors: [
+                          AppTheme.interactivePurple,
+                          AppTheme.footballOrange,
+                        ],
+                      ),
                       shape: BoxShape.circle,
                       border: Border.all(
-                        color: AppTheme.primaryBackground,
-                        width: 2,
+                        color: AppTheme.pureWhiteText,
+                        width: 2.5,
                       ),
+                      boxShadow: [
+                        BoxShadow(
+                          color: AppTheme.shadowColor.withValues(alpha: 0.2),
+                          offset: Offset(0, 4),
+                          blurRadius: 12,
+                          spreadRadius: 0,
+                        ),
+                      ],
                     ),
                     child: CustomIconWidget(
                       iconName: 'camera_alt',
                       color: AppTheme.pureWhiteText,
-                      size: 4.w,
+                      size: 4.5.w,
                     ),
                   ),
                 ),
               ),
             ],
           ),
+          SizedBox(height: 3.h),
+
+          // Username with Enhanced Typography
+          Container(
+            padding: EdgeInsets.symmetric(horizontal: 4.w, vertical: 1.h),
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
+                colors: [
+                  AppTheme.interactivePurple.withValues(alpha: 0.1),
+                  AppTheme.footballOrange.withValues(alpha: 0.05),
+                ],
+              ),
+              borderRadius: BorderRadius.circular(16),
+              border: Border.all(
+                color: AppTheme.interactivePurple.withValues(alpha: 0.1),
+                width: 1,
+              ),
+            ),
+            child: Text(
+              username,
+              style: AppTheme.darkTheme.textTheme.headlineSmall?.copyWith(
+                color: AppTheme.pureWhiteText,
+                fontWeight: FontWeight.w700,
+                letterSpacing: 0.5,
+              ),
+              textAlign: TextAlign.center,
+            ),
+          ),
           SizedBox(height: 2.h),
 
-          // Username
-          Text(
-            username,
-            style: AppTheme.darkTheme.textTheme.headlineSmall?.copyWith(
-              color: AppTheme.pureWhiteText,
-              fontWeight: FontWeight.w600,
-            ),
-            textAlign: TextAlign.center,
-          ),
-          SizedBox(height: 1.h),
-
-          // Bio
+          // Bio with Enhanced Styling
           Container(
-            constraints: BoxConstraints(maxWidth: 80.w),
+            constraints: BoxConstraints(maxWidth: 85.w),
+            padding: EdgeInsets.all(3.w),
+            decoration: BoxDecoration(
+              color: AppTheme.primaryBackground.withValues(alpha: 0.3),
+              borderRadius: BorderRadius.circular(16),
+              border: Border.all(
+                color: AppTheme.neutralGray.withValues(alpha: 0.2),
+                width: 1,
+              ),
+            ),
             child: Text(
               bio,
               style: AppTheme.darkTheme.textTheme.bodyMedium?.copyWith(
                 color: AppTheme.neutralGray,
+                height: 1.5,
+                letterSpacing: 0.3,
               ),
               textAlign: TextAlign.center,
               maxLines: 3,
               overflow: TextOverflow.ellipsis,
             ),
           ),
-          SizedBox(height: 2.h),
+          SizedBox(height: 3.h),
 
-          // Followers and Following Stats
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              _buildStatItem(
-                context,
-                'Followers',
-                followersCount.toString(),
-                () {},
+          // Enhanced Followers and Following Stats
+          Container(
+            padding: EdgeInsets.all(4.w),
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                begin: Alignment.topCenter,
+                end: Alignment.bottomCenter,
+                colors: [
+                  AppTheme.primaryBackground.withValues(alpha: 0.4),
+                  AppTheme.primaryBackground.withValues(alpha: 0.1),
+                ],
               ),
-              Container(
+              borderRadius: BorderRadius.circular(20),
+              border: Border.all(
+                color: AppTheme.dividerColor.withValues(alpha: 0.3),
                 width: 1,
-                height: 6.h,
-                color: AppTheme.dividerColor,
               ),
-              _buildStatItem(
-                context,
-                'Following',
-                followingCount.toString(),
-                () {},
-              ),
-            ],
+            ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                _buildStatItem(
+                  context,
+                  'Followers',
+                  _formatCount(followersCount),
+                  () {},
+                  AppTheme.successGreen,
+                ),
+                Container(
+                  width: 2,
+                  height: 8.h,
+                  decoration: BoxDecoration(
+                    gradient: LinearGradient(
+                      begin: Alignment.topCenter,
+                      end: Alignment.bottomCenter,
+                      colors: [
+                        AppTheme.dividerColor.withValues(alpha: 0.1),
+                        AppTheme.dividerColor,
+                        AppTheme.dividerColor.withValues(alpha: 0.1),
+                      ],
+                    ),
+                    borderRadius: BorderRadius.circular(1),
+                  ),
+                ),
+                _buildStatItem(
+                  context,
+                  'Following',
+                  _formatCount(followingCount),
+                  () {},
+                  AppTheme.footballOrange,
+                ),
+              ],
+            ),
           ),
-          SizedBox(height: 2.h),
+          SizedBox(height: 3.h),
 
-          // Edit Profile Button
-          SizedBox(
-            width: 60.w,
-            height: 6.h,
+          // Enhanced Edit Profile Button
+          Container(
+            width: 65.w,
+            height: 6.5.h,
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
+                colors: [
+                  AppTheme.interactivePurple,
+                  AppTheme.footballOrange,
+                ],
+              ),
+              borderRadius: BorderRadius.circular(16),
+              boxShadow: [
+                BoxShadow(
+                  color: AppTheme.interactivePurple.withValues(alpha: 0.4),
+                  offset: Offset(0, 6),
+                  blurRadius: 20,
+                  spreadRadius: 0,
+                ),
+                BoxShadow(
+                  color: AppTheme.footballOrange.withValues(alpha: 0.2),
+                  offset: Offset(0, 2),
+                  blurRadius: 8,
+                  spreadRadius: 0,
+                ),
+              ],
+            ),
             child: ElevatedButton(
               onPressed: onEditProfile,
               style: ElevatedButton.styleFrom(
-                backgroundColor: AppTheme.interactivePurple,
+                backgroundColor: Colors.transparent,
                 foregroundColor: AppTheme.pureWhiteText,
+                shadowColor: Colors.transparent,
                 shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(12),
+                  borderRadius: BorderRadius.circular(16),
                 ),
               ),
-              child: Text(
-                'Edit Profile',
-                style: AppTheme.darkTheme.textTheme.titleMedium?.copyWith(
-                  color: AppTheme.pureWhiteText,
-                  fontWeight: FontWeight.w500,
-                ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  CustomIconWidget(
+                    iconName: 'edit',
+                    color: AppTheme.pureWhiteText,
+                    size: 5.w,
+                  ),
+                  SizedBox(width: 2.w),
+                  Text(
+                    'Edit Profile',
+                    style: AppTheme.darkTheme.textTheme.titleMedium?.copyWith(
+                      color: AppTheme.pureWhiteText,
+                      fontWeight: FontWeight.w600,
+                      letterSpacing: 0.5,
+                    ),
+                  ),
+                ],
               ),
             ),
           ),
@@ -163,27 +329,66 @@ class ProfileHeaderWidget extends StatelessWidget {
     String label,
     String count,
     VoidCallback onTap,
+    Color accentColor,
   ) {
     return GestureDetector(
       onTap: onTap,
-      child: Column(
-        children: [
-          Text(
-            count,
-            style: AppTheme.darkTheme.textTheme.headlineSmall?.copyWith(
-              color: AppTheme.pureWhiteText,
-              fontWeight: FontWeight.w700,
-            ),
+      child: Container(
+        padding: EdgeInsets.all(3.w),
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+            colors: [
+              accentColor.withValues(alpha: 0.1),
+              accentColor.withValues(alpha: 0.05),
+            ],
           ),
-          SizedBox(height: 0.5.h),
-          Text(
-            label,
-            style: AppTheme.darkTheme.textTheme.bodyMedium?.copyWith(
-              color: AppTheme.neutralGray,
-            ),
+          borderRadius: BorderRadius.circular(16),
+          border: Border.all(
+            color: accentColor.withValues(alpha: 0.2),
+            width: 1,
           ),
-        ],
+        ),
+        child: Column(
+          children: [
+            Container(
+              padding: EdgeInsets.all(2.w),
+              decoration: BoxDecoration(
+                color: accentColor.withValues(alpha: 0.2),
+                borderRadius: BorderRadius.circular(12),
+              ),
+              child: Text(
+                count,
+                style: AppTheme.darkTheme.textTheme.headlineSmall?.copyWith(
+                  color: AppTheme.pureWhiteText,
+                  fontWeight: FontWeight.w800,
+                  letterSpacing: 0.5,
+                ),
+              ),
+            ),
+            SizedBox(height: 1.h),
+            Text(
+              label,
+              style: AppTheme.darkTheme.textTheme.bodyMedium?.copyWith(
+                color: AppTheme.neutralGray,
+                fontWeight: FontWeight.w500,
+                letterSpacing: 0.3,
+              ),
+            ),
+          ],
+        ),
       ),
     );
+  }
+
+  String _formatCount(int count) {
+    if (count >= 1000000) {
+      return '${(count / 1000000).toStringAsFixed(1)}M';
+    } else if (count >= 1000) {
+      return '${(count / 1000).toStringAsFixed(1)}K';
+    } else {
+      return count.toString();
+    }
   }
 }

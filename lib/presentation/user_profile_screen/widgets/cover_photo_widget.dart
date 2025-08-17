@@ -17,76 +17,224 @@ class CoverPhotoWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
-      height: 25.h,
+      height: 30.h,
+      margin: EdgeInsets.symmetric(horizontal: 2.w),
       child: Stack(
         children: [
-          // Cover Photo
+          // Enhanced Cover Photo Container
           Container(
             width: double.infinity,
-            height: 25.h,
+            height: 30.h,
             decoration: BoxDecoration(
-              borderRadius: BorderRadius.only(
-                bottomLeft: Radius.circular(16),
-                bottomRight: Radius.circular(16),
+              borderRadius: BorderRadius.circular(24),
+              gradient: LinearGradient(
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
+                colors: [
+                  AppTheme.interactivePurple.withValues(alpha: 0.1),
+                  AppTheme.footballOrange.withValues(alpha: 0.1),
+                ],
               ),
+              boxShadow: [
+                BoxShadow(
+                  color: AppTheme.shadowColor.withValues(alpha: 0.15),
+                  offset: Offset(0, 8),
+                  blurRadius: 32,
+                  spreadRadius: 0,
+                ),
+                BoxShadow(
+                  color: AppTheme.interactivePurple.withValues(alpha: 0.1),
+                  offset: Offset(0, 4),
+                  blurRadius: 16,
+                  spreadRadius: 0,
+                ),
+              ],
             ),
             child: ClipRRect(
-              borderRadius: BorderRadius.only(
-                bottomLeft: Radius.circular(16),
-                bottomRight: Radius.circular(16),
-              ),
-              child: CustomImageWidget(
-                imageUrl: coverImageUrl,
-                width: double.infinity,
-                height: 25.h,
-                fit: BoxFit.cover,
-              ),
-            ),
-          ),
+              borderRadius: BorderRadius.circular(24),
+              child: Stack(
+                children: [
+                  // Cover Image
+                  CustomImageWidget(
+                    imageUrl: coverImageUrl,
+                    width: double.infinity,
+                    height: 30.h,
+                    fit: BoxFit.cover,
+                  ),
 
-          // Gradient Overlay
-          Container(
-            width: double.infinity,
-            height: 25.h,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.only(
-                bottomLeft: Radius.circular(16),
-                bottomRight: Radius.circular(16),
-              ),
-              gradient: LinearGradient(
-                begin: Alignment.topCenter,
-                end: Alignment.bottomCenter,
-                colors: [
-                  Colors.transparent,
-                  AppTheme.primaryBackground.withValues(alpha: 0.3),
-                  AppTheme.primaryBackground.withValues(alpha: 0.7),
+                  // Enhanced Gradient Overlays
+                  Container(
+                    width: double.infinity,
+                    height: 30.h,
+                    decoration: BoxDecoration(
+                      gradient: LinearGradient(
+                        begin: Alignment.topCenter,
+                        end: Alignment.bottomCenter,
+                        stops: [0.0, 0.3, 0.7, 1.0],
+                        colors: [
+                          Colors.transparent,
+                          AppTheme.primaryBackground.withValues(alpha: 0.1),
+                          AppTheme.primaryBackground.withValues(alpha: 0.3),
+                          AppTheme.primaryBackground.withValues(alpha: 0.8),
+                        ],
+                      ),
+                    ),
+                  ),
+
+                  // Decorative Elements
+                  Positioned(
+                    top: 3.h,
+                    right: 4.w,
+                    child: Container(
+                      padding: EdgeInsets.all(2.w),
+                      decoration: BoxDecoration(
+                        gradient: LinearGradient(
+                          begin: Alignment.topLeft,
+                          end: Alignment.bottomRight,
+                          colors: [
+                            AppTheme.interactivePurple.withValues(alpha: 0.2),
+                            AppTheme.footballOrange.withValues(alpha: 0.2),
+                          ],
+                        ),
+                        borderRadius: BorderRadius.circular(12),
+                        border: Border.all(
+                          color: AppTheme.pureWhiteText.withValues(alpha: 0.2),
+                          width: 1,
+                        ),
+                      ),
+                      child: CustomIconWidget(
+                        iconName: 'sports_soccer',
+                        color: AppTheme.pureWhiteText.withValues(alpha: 0.7),
+                        size: 6.w,
+                      ),
+                    ),
+                  ),
+
+                  Positioned(
+                    bottom: 4.h,
+                    left: 4.w,
+                    child: Container(
+                      padding: EdgeInsets.all(2.w),
+                      decoration: BoxDecoration(
+                        gradient: LinearGradient(
+                          begin: Alignment.topLeft,
+                          end: Alignment.bottomRight,
+                          colors: [
+                            AppTheme.footballOrange.withValues(alpha: 0.2),
+                            AppTheme.successGreen.withValues(alpha: 0.2),
+                          ],
+                        ),
+                        borderRadius: BorderRadius.circular(12),
+                        border: Border.all(
+                          color: AppTheme.pureWhiteText.withValues(alpha: 0.2),
+                          width: 1,
+                        ),
+                      ),
+                      child: CustomIconWidget(
+                        iconName: 'star',
+                        color: AppTheme.pureWhiteText.withValues(alpha: 0.7),
+                        size: 5.w,
+                      ),
+                    ),
+                  ),
                 ],
               ),
             ),
           ),
 
-          // Edit Button
+          // Enhanced Edit Button
           Positioned(
-            bottom: 2.h,
+            bottom: 3.h,
             right: 4.w,
             child: GestureDetector(
               onTap: onEditPressed,
               child: Container(
-                width: 12.w,
-                height: 12.w,
+                width: 14.w,
+                height: 14.w,
                 decoration: BoxDecoration(
-                  color: AppTheme.primaryBackground.withValues(alpha: 0.8),
+                  gradient: LinearGradient(
+                    begin: Alignment.topLeft,
+                    end: Alignment.bottomRight,
+                    colors: [
+                      AppTheme.interactivePurple,
+                      AppTheme.footballOrange,
+                    ],
+                  ),
                   shape: BoxShape.circle,
                   border: Border.all(
-                    color: AppTheme.pureWhiteText.withValues(alpha: 0.3),
-                    width: 1,
+                    color: AppTheme.pureWhiteText,
+                    width: 3,
                   ),
+                  boxShadow: [
+                    BoxShadow(
+                      color: AppTheme.interactivePurple.withValues(alpha: 0.4),
+                      offset: Offset(0, 6),
+                      blurRadius: 20,
+                      spreadRadius: 0,
+                    ),
+                    BoxShadow(
+                      color: AppTheme.shadowColor.withValues(alpha: 0.2),
+                      offset: Offset(0, 2),
+                      blurRadius: 8,
+                      spreadRadius: 0,
+                    ),
+                  ],
                 ),
                 child: CustomIconWidget(
                   iconName: 'edit',
                   color: AppTheme.pureWhiteText,
-                  size: 5.w,
+                  size: 6.w,
                 ),
+              ),
+            ),
+          ),
+
+          // Corner Decorations
+          Positioned(
+            top: 2.h,
+            left: 2.w,
+            child: Container(
+              width: 4.w,
+              height: 4.w,
+              decoration: BoxDecoration(
+                gradient: LinearGradient(
+                  colors: [
+                    AppTheme.interactivePurple.withValues(alpha: 0.6),
+                    AppTheme.footballOrange.withValues(alpha: 0.6),
+                  ],
+                ),
+                shape: BoxShape.circle,
+              ),
+            ),
+          ),
+
+          Positioned(
+            top: 6.h,
+            left: 8.w,
+            child: Container(
+              width: 2.w,
+              height: 2.w,
+              decoration: BoxDecoration(
+                color: AppTheme.successGreen.withValues(alpha: 0.5),
+                shape: BoxShape.circle,
+              ),
+            ),
+          ),
+
+          Positioned(
+            bottom: 8.h,
+            right: 12.w,
+            child: Container(
+              width: 3.w,
+              height: 3.w,
+              decoration: BoxDecoration(
+                gradient: LinearGradient(
+                  colors: [
+                    AppTheme.footballOrange.withValues(alpha: 0.4),
+                    AppTheme.successGreen.withValues(alpha: 0.4),
+                  ],
+                ),
+                shape: BoxShape.circle,
               ),
             ),
           ),
